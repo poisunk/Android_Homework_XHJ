@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FirstHomework</string>
+
+    <string name="recommend_playlist">推荐歌单</string>
 </resources>

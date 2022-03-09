@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android_Homework_XHJ/FirstHomework/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.2574074074074074" />
+        <entry key="..\:/Android_Homework_XHJ/FirstHomework/app/src/main/res/drawable/ic_baseline_play_circle_filled_24.xml" value="0.1484375" />
+        <entry key="..\:/Android_Homework_XHJ/FirstHomework/app/src/main/res/drawable/shape_playcount.xml" value="0.1484375" />
         <entry key="..\:/Android_Homework_XHJ/FirstHomework/app/src/main/res/layout/activity_main.xml" value="0.24947916666666667" />
         <entry key="..\:/Android_Homework_XHJ/FirstHomework/app/src/main/res/layout/fragment_recommend_playlist.xml" value="0.24947916666666667" />
+        <entry key="..\:/Android_Homework_XHJ/FirstHomework/app/src/main/res/layout/list_cover.xml" value="0.6" />
       </map>
     </option>
   </component>

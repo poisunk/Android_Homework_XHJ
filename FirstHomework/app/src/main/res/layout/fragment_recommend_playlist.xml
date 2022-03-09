@@ -15,16 +15,17 @@
         android:layout_height="60dp">
 
         <ImageButton
+            android:id="@+id/button_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/ic_baseline_arrow_back_24" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="38sp"
+            android:layout_height="40dp"
+            android:text="@string/recommend_playlist"
+            android:textColor="@color/deep_gray"
+            android:textSize="30sp"
             android:lines="1"
             android:ellipsize="end"
             android:paddingStart="15dp"
@@ -32,9 +33,11 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:overScrollMode="never"/>
 
 
 
