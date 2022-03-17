@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
             R.id.button_add ->{
 //                d1("MainActivity","add")
                 list.add {}
-                adapter.notifyDataSetChanged()
+                adapter.notifyItemInserted(adapter.itemCount)
             }
         }
     }

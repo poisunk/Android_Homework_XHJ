@@ -40,13 +40,13 @@ class MyRecylcerAdapter(val list:MutableList<Runnable>,val context: Context):
 
     override fun onItemMove(fromPosition: Int, targetPosition: Int): Boolean {
         Collections.swap(list,fromPosition,targetPosition)
-        notifyDataSetChanged()
-        return false
+        notifyItemMoved(fromPosition,targetPosition)
+        return true
     }
 
     override fun onItemSwiped(position: Int) {
         list.removeAt(position)
-        notifyDataSetChanged()
+        notifyItemRemoved(position)
     }
 
 

@@ -22,8 +22,7 @@ class ItemCallBack(private val callback:ItemTouchHelperAdapterCallback) : ItemTo
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        callback.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
-        return true
+        return callback.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
