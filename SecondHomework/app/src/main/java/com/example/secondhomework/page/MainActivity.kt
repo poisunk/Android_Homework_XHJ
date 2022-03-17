@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.secondhomework.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,6 +19,11 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val itemCallBack=ItemCallBack(adapter)
+        val itemTouchHelper=ItemTouchHelper(itemCallBack)
+        itemTouchHelper.attachToRecyclerView(list_task)
+
         list_task.adapter=adapter
         list_task.layoutManager=LinearLayoutManager(this)
         button_add.setOnClickListener(this)
@@ -27,7 +33,7 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.button_add ->{
-                d1("Main","add")
+//                d1("MainActivity","add")
                 list.add {}
                 adapter.notifyDataSetChanged()
             }

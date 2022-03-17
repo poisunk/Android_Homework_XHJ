@@ -57,7 +57,7 @@ class MyProgressBar(context: Context,attrs:AttributeSet?,defStyleAttr:Int)
         )
         canvas?.drawRoundRect(rectF, rad, rad, mPaint)
 
-        mPaint.color=Color.GREEN
+        mPaint.color=Color.CYAN
         mPaint.style=Paint.Style.FILL
         val rectF2=RectF(
             left_top.x.toFloat()-width,
