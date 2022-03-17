@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SecondHomework</string>
+    <string name="add_task">添加下载任务</string>
 </resources>
