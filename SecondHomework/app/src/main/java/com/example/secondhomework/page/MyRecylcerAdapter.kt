@@ -1,5 +1,6 @@
 package com.example.secondhomework.page
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -21,21 +22,24 @@ class MyRecylcerAdapter(val list:MutableList<Runnable>,val context: Context):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_task,parent,false))
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.progressNum.text= (position+1).toString()
+        val progress:Int=(Math.random()*100).toInt()
+        holder.progressBar.setProgress(progress)
+        holder.progressInfo.text= "$progress%"
     }
 
     override fun getItemCount(): Int = list.size
 
     inner class ViewHolder(view: View):RecyclerView.ViewHolder(view){
 
-        private val progressBar:MyProgressBar = view.findViewById(R.id.item_progress_bar)
+        val progressBar:MyProgressBar = view.findViewById(R.id.item_progress_bar)
 
         val progressNum:TextView = view.findViewById(R.id.item_progress_num)
 
-        init {
-            progressBar.setProgress((Math.random()*100).toInt())
-        }
+        val progressInfo:TextView = view.findViewById(R.id.item_progress_info)
+
     }
 
     override fun onItemMove(fromPosition: Int, targetPosition: Int): Boolean {
