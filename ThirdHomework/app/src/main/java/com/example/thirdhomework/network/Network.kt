@@ -1,4 +1,4 @@
-package com.example.firstHomework.networkService
+package com.example.thirdhomework.network
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -9,26 +9,24 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 /**
- *@author:created by $[poisunk]
+ *创建者： poisunk
  *邮箱：1714480752@qq.com
  */
-object PlaylistsNetwork {
+object Network {
 
     private val networkService=ServiceCreator.create(NetworkService::class.java)
 
-    suspend fun searchPlaylists(limit: Int)= networkService.getPlaylists(limit).await()
 
-    private suspend fun <T> Call<T>.await():T{
+    private suspend fun <T> Call<T>.await():T {
 
         return suspendCoroutine { continuation ->
             enqueue(object : Callback<T> {
-
-
                 override fun onResponse(call: Call<T>, response: Response<T>) {
                     val body = response.body()
-                    if(body!=null){
+
+                    if (body != null) {
                         continuation.resume(body)
-                    }else{
+                    } else {
                         continuation.resumeWithException(RuntimeException("response body is null"))
                     }
                 }
@@ -41,5 +39,4 @@ object PlaylistsNetwork {
         }
 
     }
-
 }

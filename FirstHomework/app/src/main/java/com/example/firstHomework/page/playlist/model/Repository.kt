@@ -22,7 +22,7 @@ object Repository {
                 Result.failure(RuntimeException())
             }
         }catch (e:Exception){
-            Result.failure<List<com.example.firstHomework.bean.Result>>(e)
+            Result.failure(e)
         }
         emit(result)
     }

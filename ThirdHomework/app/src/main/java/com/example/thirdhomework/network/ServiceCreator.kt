@@ -1,4 +1,4 @@
-package com.example.firstHomework.networkService
+package com.example.thirdhomework.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
