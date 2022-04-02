@@ -31,8 +31,10 @@ class MyRecyclerViewBehavior(private val context: Context,
         child: View,
         dependency: View
     ): Boolean {
-        val h = dependency.marginTop + dependency.measuredHeight + dependency.marginBottom
+        val h = dependency.measuredHeight + dependency.marginBottom
         child.y = dependency.y + h.toFloat()
-        return super.onDependentViewChanged(parent, child, dependency)
+        return true
     }
+
+
 }
