@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.example.thirdhomework.page.main.widget.MyView
+        android:id="@+id/my_view"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@color/teal_700"

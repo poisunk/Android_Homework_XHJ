@@ -22,8 +22,6 @@ object PlaylistsNetwork {
 
         return suspendCoroutine { continuation ->
             enqueue(object : Callback<T> {
-
-
                 override fun onResponse(call: Call<T>, response: Response<T>) {
                     val body = response.body()
                     if(body!=null){

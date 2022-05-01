@@ -4,7 +4,6 @@ import com.example.firstHomework.bean.PlaylistsBean
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
-
 /**
  *@author:created by $[poisunk]
  *邮箱：1714480752@qq.com

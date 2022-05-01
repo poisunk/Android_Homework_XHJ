@@ -1,31 +1,42 @@
 package com.example.thirdhomework.page.main.behavior
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewConfiguration
-import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.AnimationUtils
 import android.widget.Scroller
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.marginBottom
 import androidx.core.view.marginTop
-import kotlin.math.abs
+import com.example.thirdhomework.R
 
 /**
  *创建者： poisunk
  *邮箱：1714480752@qq.com
  */
-class MyHeadViewBehavior(private val context: Context,
-                         private val attr: AttributeSet?)
+class MyHeadViewBehavior(
+    private val context: Context,
+    private val attr: AttributeSet?,
+)
     :CoordinatorLayout.Behavior<View>(context,attr) {
 
-    //HeadView是否隐藏
-    private var hide = false
+    private val TAG = "MyHeadViewBehavior"
+
 
     private val mScroller:Scroller = Scroller(context)
+
+    private val scaleAnim:Animation
+
+    init {
+        scaleAnim = AnimationUtils.loadAnimation(context, R.anim.scaleanim)
+    }
 
     constructor(context: Context) : this(context,null)
 
@@ -35,81 +46,93 @@ class MyHeadViewBehavior(private val context: Context,
         directTargetChild: View,
         target: View,
         axes: Int,
-        type: Int
+        type: Int,
     ): Boolean {
         return axes == ViewCompat.SCROLL_AXIS_VERTICAL
     }
 
+    override fun onNestedScrollAccepted(
+        coordinatorLayout: CoordinatorLayout,
+        child: View,
+        directTargetChild: View,
+        target: View,
+        axes: Int,
+        type: Int
+    ) {
+        super.onNestedScrollAccepted(coordinatorLayout,
+            child,
+            directTargetChild,
+            target,
+            axes,
+            type)
 
+    }
 
-    override fun onNestedScroll(
+    override fun onNestedPreScroll(
         coordinatorLayout: CoordinatorLayout,
         child: View,
         target: View,
-        dxConsumed: Int,
-        dyConsumed: Int,
-        dxUnconsumed: Int,
-        dyUnconsumed: Int,
+        dx: Int,
+        dy: Int,
+        consumed: IntArray,
         type: Int,
-        consumed: IntArray
     ) {
-        val animator = child.animate()
         val h = child.measuredHeight + child.marginBottom + child.marginTop   //计算出需要移动的高度
-        animator.duration = 500
-        if (hide){
-            if (dyConsumed < 0){
-                animator.translationY(0f).start()
-                hide = false
+
+        child.pivotX = child.measuredWidth.toFloat()/2
+        child.pivotY = child.measuredHeight.toFloat()
+
+        if(dy>0) {
+            val scrollY = if(coordinatorLayout.scrollY + dy <= h){
+                dy
+            }else{
+                h - coordinatorLayout.scrollY
             }
-        }else {
-            if (dyConsumed > 0) {
-                animator.translationY(-h.toFloat()).start()
-                hide = true
+
+
+            child.alpha = 1f - coordinatorLayout.scrollY.toFloat()/h
+            child.scaleX = 1f - coordinatorLayout.scrollY.toFloat()/h
+            child.scaleY = 1f - coordinatorLayout.scrollY.toFloat()/h
+
+            coordinatorLayout.scrollBy(0, scrollY)
+            consumed[1] = scrollY
+
+        }else if(dy<0){
+            val scrollY = if(coordinatorLayout.scrollY + dy < 0){
+                -coordinatorLayout.scrollY
+            }else{
+                dy
             }
+
+            child.alpha = 1f - coordinatorLayout.scrollY.toFloat()/h
+            child.scaleX = 1f - coordinatorLayout.scrollY.toFloat()/h
+            child.scaleY = 1f - coordinatorLayout.scrollY.toFloat()/h
+
+            coordinatorLayout.scrollBy(0, scrollY)
+            consumed[1] = scrollY
         }
+
+        super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
     }
 
-
-//    private var mLastY:Float = 0f
-//
-//    override fun onInterceptTouchEvent(
-//        parent: CoordinatorLayout,
+//    override fun onStopNestedScroll(
+//        coordinatorLayout: CoordinatorLayout,
 //        child: View,
-//        ev: MotionEvent
-//    ): Boolean {
-//        when(ev.action){
-//            MotionEvent.ACTION_DOWN -> {
-//                Log.d("onInterceptTouchEvent","ACTION_DOWN")
-//                mLastY = ev.rawY
-//            }
-//            MotionEvent.ACTION_MOVE -> {
-//                Log.d("onInterceptTouchEvent","ACTION_MOVE")
+//        target: View,
+//        type: Int
+//    ) {
+//        val h = child.measuredHeight + child.marginBottom + child.marginTop
+//        if(coordinatorLayout.scrollY >= h/2){
+//            val alphaAnimation = ObjectAnimator.ofFloat(child,"alpha",child.alpha,0f)
+//            val scaleXAnimation = ObjectAnimator.ofFloat(child,"scaleX",child.scaleX,0f)
+//            val scaleYAnimation = ObjectAnimator.ofFloat(child,"scaleY",child.scaleY,0f)
+//            val animationSet = AnimatorSet()
+//            animationSet.playSequentially(alphaAnimation,scaleXAnimation,scaleYAnimation)
+//            animationSet.start()
+//        }else{
 //
-//                return true
-//            }
 //        }
-//        return super.onInterceptTouchEvent(parent, child, ev)
+//        super.onStopNestedScroll(coordinatorLayout, child, target, type)
 //    }
-//
-//
-//    override fun onTouchEvent(parent: CoordinatorLayout, child: View, ev: MotionEvent): Boolean {
-//        val h = child.measuredHeight + child.marginBottom + child.marginTop   //计算出需要移动的高度
-//
-//        when(ev.action){
-//            MotionEvent.ACTION_DOWN -> {
-//                Log.d("onTouchEvent","ACTION_DOWN")
-//            }
-//            MotionEvent.ACTION_MOVE -> {
-//                Log.d("onTouchEvent","ACTION_MOVE")
-//                val moveY = ev.rawY - mLastY
-//                child.offsetTopAndBottom(moveY.toInt())
-//                mLastY = ev.rawY
-//            }
-//        }
-//
-//        return true
-//    }
-
-
 
 }

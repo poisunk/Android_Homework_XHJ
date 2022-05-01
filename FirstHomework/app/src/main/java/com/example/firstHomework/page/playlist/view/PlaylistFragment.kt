@@ -59,6 +59,8 @@ class PlaylistFragment:Fragment() {
                 it.exceptionOrNull()?.printStackTrace()
             }
         })
+
+
         button_back.setOnClickListener(View.OnClickListener {
             val fragmentManager=requireActivity().supportFragmentManager
             fragmentManager.popBackStack()

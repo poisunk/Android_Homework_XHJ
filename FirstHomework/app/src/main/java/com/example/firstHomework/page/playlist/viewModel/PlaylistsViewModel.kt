@@ -16,12 +16,13 @@ class PlaylistsViewModel:ViewModel() {
 
     val playlists=ArrayList<Result>()
 
-    val playlistsLiveData=Transformations.switchMap(searchLiveData){ limit ->
-        Repository.searchPlaylists(limit)
-    }
+    val playlistsLiveData=Transformations
+        .switchMap(searchLiveData){
+            Repository.searchPlaylists(it)
+        }
 
     fun searchPlaylists(limit:Int){
-        searchLiveData.value=limit
+        searchLiveData.value = limit
     }
 
 }
